@@ -1,5 +1,5 @@
 package classes;
 
 public class Game {
-    //Controlls game, catch player commands
+    //Controls game, catch player commands
 }

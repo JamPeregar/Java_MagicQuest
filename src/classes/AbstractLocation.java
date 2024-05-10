@@ -51,7 +51,7 @@ public class AbstractLocation {
         for (AbstractItem item : localinventory) { // Перебор всех предметов в локации
             if (item.getName().equals(itemName)) { // Если нашли нужный предмет
                 localinventory.remove(item); // Удаляем его из списка предметов
-                return item; // Возвращаем предмет
+                return null; // Возвращаем предмет
             }
         }
         return null; // Если предмет не найден, возвращаем null

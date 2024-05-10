@@ -24,5 +24,8 @@ public class Main {
         l1.addExit("Living room", l2);
         l2.addExit("Bath room", l1);
         out.println(l1 + "\n" + l2);
+        p1.giveItem(potion2);
+        p1.takeItem("Лечебное зелье");
+        p1.showInventory();
     }
 }

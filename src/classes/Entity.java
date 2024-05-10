@@ -28,6 +28,16 @@ public abstract class Entity {
         //this.pubinventory.put(item.getName(), 1);
     }
 
+    public AbstractItem takeItem(String itemName) {
+        for (AbstractItem item : this.inventory) { // Перебор всех предметов в локации
+            if (itemName.compareTo(item.getName()) == 0) { // Если нашли нужный предмет
+                this.inventory.remove(item); // Удаляем его из списка предметов
+                return item; // Возвращаем предмет
+            }
+        }
+        return null; // Если предмет не найден, возвращаем null
+    }
+
     public void useItem(String itemname) {
         for (AbstractItem item : this.inventory) {
             if (itemname.compareTo(item.getName()) == 0) {

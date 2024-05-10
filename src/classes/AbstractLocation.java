@@ -10,7 +10,18 @@ public class AbstractLocation {
         this.descr = dscr;
     }
 
+    public AbstractLocation(final String name, final String dscr) {
+        this.name = name;
+        this.descr = dscr;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return descr;
+    }
 
     @Override
     public String toString() {

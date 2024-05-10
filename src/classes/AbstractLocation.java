@@ -46,6 +46,11 @@ public class AbstractLocation {
         localinventory.add(item); // Добавляем предмет в список предметов текущей локации
     }
 
+    // Метод для получения локального инвентаря локации
+    public ArrayList<AbstractItem> getLocalInventory() {
+        return localinventory;
+    }
+
     // Метод для взятия предмета из локации
     public AbstractItem takeItem(String itemName) {
         for (AbstractItem item : localinventory) { // Перебор всех предметов в локации
@@ -60,7 +65,7 @@ public class AbstractLocation {
     @Override
     public String toString() {
 
-        StringBuilder description = new StringBuilder("Локация: " + this.name + "\nОписание: " + this.descr);
+        StringBuilder description = new StringBuilder("\nЛокация: " + this.name + "\nОписание: " + this.descr);
         description.append("\nПереходы:"); // Добавление информации о выходах
         for (String direction : exits.keySet()) { // Перебор всех выходов
             description.append("\n").append(direction); // Добавление информации о каждом выходе

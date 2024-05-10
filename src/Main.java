@@ -1,7 +1,4 @@
-import classes.AbstractItem;
-import classes.Player;
-import classes.Potion;
-import classes.Water;
+import classes.*;
 
 import static java.lang.System.out;
 
@@ -18,5 +15,8 @@ public class Main {
         p1.giveItem(potion);
         p1.showInventory();
         p1.useItem("Пузырёк воды");
+
+        Game startGame = new Game();
+        startGame.game();
     }
 }

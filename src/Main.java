@@ -24,5 +24,8 @@ public class Main {
         l1.addExit("Living room", l2);
         l2.addExit("Bath room", l1);
         out.println(l1 + "\n" + l2);
+
+        Game gameStart = new Game();
+        gameStart.game();
     }
 }

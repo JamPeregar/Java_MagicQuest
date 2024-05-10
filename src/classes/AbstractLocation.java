@@ -60,7 +60,7 @@ public class AbstractLocation {
     @Override
     public String toString() {
 
-        StringBuilder description = new StringBuilder("Локация: " + this.name + "\nОписание: " + this.descr); // Получение описания от суперкласса
+        StringBuilder description = new StringBuilder("Локация: " + this.name + "\nОписание: " + this.descr);
         description.append("\nПереходы:"); // Добавление информации о выходах
         for (String direction : exits.keySet()) { // Перебор всех выходов
             description.append("\n").append(direction); // Добавление информации о каждом выходе

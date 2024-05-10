@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Player extends Entity{
-    private static Player player = null; // Only 1 player
+    private static Player player; // Only 1 player
     private Map<String, AbstractItem> pubinventory = new HashMap<>();
 
 
@@ -15,7 +15,12 @@ public class Player extends Entity{
     }
     //Реализация синглетона - игрок всё равно один.
     public static Player createPlayer(String name, String descr) {
-        if (player == null) return new Player(name, descr);
+        if (player == null) {
+            player = new Player(name, descr);
+        } else
+        {
+            System.out.println("Игрок уже существует!!");
+        }
         return player;
     }
     @Override

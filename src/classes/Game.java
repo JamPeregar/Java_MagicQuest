@@ -25,7 +25,7 @@ public class Game {
                     System.out.println(direction);
                 }
                 System.out.println("Введите название локации для перехода:");
-                String chosenLocation = scanner.nextLine();
+                String chosenLocation = capitalize(scanner.nextLine());
                 Location nextLocation = currentLocation.go(chosenLocation);
                 if (nextLocation != null) {
                     currentLocation = nextLocation;
@@ -50,5 +50,14 @@ public class Game {
     public void createTransitions (){
         start.addExit("Сад", garden);
         garden.addExit("Начальная локация", start);
+    }
+
+    public static String capitalize(String inputString) {
+        if (inputString == null || inputString.isEmpty()) {
+            return inputString;
+        }
+        char firstLetter = inputString.charAt(0);
+        char capitalFirstLetter = Character.toUpperCase(firstLetter);
+        return capitalFirstLetter + inputString.substring(1);
     }
 }

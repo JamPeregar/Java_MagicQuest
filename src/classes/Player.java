@@ -43,7 +43,7 @@ public class Player extends Entity{
 
     @Override
     public void showInventory() {
-        System.out.println("Содержимое вашего инвентаря:");
+        System.out.println("\nСодержимое вашего инвентаря:");
         if (!inventory.isEmpty()) {
             for (AbstractItem obj : inventory) {
                 System.out.println(obj);

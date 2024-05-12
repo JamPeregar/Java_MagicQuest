@@ -2,9 +2,11 @@
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
+.idea/misc.xml
 
 ### Eclipse ###
 .apt_generated
+.idea/misc.xml
 .classpath
 .factorypath
 .project
@@ -21,11 +23,12 @@ bin/
 /dist/
 /nbdist/
 /.nb-gradle/
+.idea/misc.xml
 
 ### VS Code ###
 .vscode/
+.idea/misc.xml
 
 ### Mac OS ###
 .DS_Store
-.idea/misc.xml
 .idea/misc.xml

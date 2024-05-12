@@ -10,22 +10,17 @@ public class Main {
         out.println(p1.toString());
 
         AbstractItem potion = new Potion("Странное зелье", "Загадочный напиток, горький запах");
-        AbstractItem water = new Water("Пузырёк воды", "H2o или просто вода, не забывайте увлажнять организм!");
-        AbstractItem water2 = new Water("Пузырёк воды", "H2o или просто вода, не забывайте увлажнять организм!");
+        AbstractItem water = new Water("Пузырёк воды"
+                , "H2o или просто вода, не забывайте увлажнять организм!"
+                , "+ 1 к здоровью и красноречию!");
+        AbstractItem water2 = new Water("Фляга тухлой воды", "Тухлая вода - гадость! - 2 к здоровью",
+                "+ тошнота, - 1 к здоровью");
 
         p1.giveItem(water);
+        p1.giveItem(water2);
         p2.giveItem(potion);
         p1.showInventory();
+        p1.useItem("Фляга тухлой воды");
         p1.useItem("Пузырёк воды");
-        AbstractItem potion2 = new Potion("Лечебное зелье", "Здоровый напиток");
-        Location l1 = new Location("Гостиная", "Хорошее место, чтобы отдохнуть");
-        Location l2 = new Location("Ванная", "Популярное место для соблюдения гигиенических процедур!");
-        l1.addItem(potion2);
-        l1.addExit("Living room", l2);
-        l2.addExit("Bath room", l1);
-        out.println(l1 + "\n" + l2);
-        p1.giveItem(potion2);
-        p1.takeItem("Лечебное зелье");
-        p1.showInventory();
     }
 }

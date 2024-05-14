@@ -22,5 +22,16 @@ public class Main {
         p1.showInventory();
         p1.useItem("Фляга тухлой воды");
         p1.useItem("Пузырёк воды");
+
+        AbstractQuest q1 = new AbstractQuest("Гигиена", "Поковырять в носу") {
+            @Override
+            public void complete() {
+                out.println("Вы ковыряете в носу");
+                this.setFlag();
+            }
+        };
+        out.println(q1);
+        q1.complete();
+        out.println(q1);
     }
 }

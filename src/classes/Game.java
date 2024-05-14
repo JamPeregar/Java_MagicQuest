@@ -92,11 +92,12 @@ public class Game {
     }
 
     private void createItems (){
-        AbstractItem potion = new Potion("Странное зелье", "Загадочный напиток, горький запах");
-        AbstractItem water = new Water("Пузырёк воды", "H2o или просто вода, не забывайте увлажнять организм!");
-        AbstractItem water2 = new Water("Пузырёк воды", "H2o или просто вода, не забывайте увлажнять организм!");
+        AbstractItem potion = new Potion("Странное зелье", "Загадочный напиток, горький запах", "Проклятие поноса!");
+        AbstractItem water = new Water("Пузырёк воды", "H2o или просто вода, не забывайте увлажнять организм!", "Получен заряд бодрости");
+        AbstractItem water2 = new Water("Целебное зелье воды", "H2o или просто вода, не забывайте увлажнять организм!", "Здоровье восстановлено");
         start.addItem(potion);
-        start.addItem(water);
+        garden.addItem(water);
+        start.addItem(water2);
     }
 
     private void createPlayers(){

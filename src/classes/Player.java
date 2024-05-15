@@ -33,14 +33,6 @@ public class Player extends Entity{
         // Может сделать отдельный Map с именами и количеством?
     }
 
-    public void useItem(String itemname) {
-        for (AbstractItem item : this.inventory) {
-            if (itemname.compareTo(item.getName()) == 0) {
-                item.useCase(this);
-            }
-        }
-    }
-
     @Override
     public void showInventory() {
         System.out.println("\nСодержимое вашего инвентаря:");

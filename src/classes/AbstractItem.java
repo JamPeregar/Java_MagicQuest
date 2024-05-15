@@ -1,10 +1,10 @@
 package classes;
 
 public abstract class AbstractItem {
-    protected String name;
-    protected String descr;
-    protected String effect;
-    protected boolean isUsed = false;
+    private String name;
+    private String descr;
+    private String effect;
+    private boolean isUsed = false;
 
     public AbstractItem(final String name, final String descr) {
         this.name = name;
@@ -32,14 +32,19 @@ public abstract class AbstractItem {
         return this.isUsed;
     }
 
+    public void setUsed() {
+        this.isUsed = !this.isUsed;
+    }
+
+    public String getEffect() {
+        return effect;
+    }
+
     public abstract void useCase(Entity user); // Когда предмет будет использован персонажем.
 
     @Override
     public String toString() {
-        return "Предмет{" +
-                "Имя:'" + name + '\'' +
-                ", Описание:'" + descr + '\'' +
-                ", Использовано:" + isUsed +
-                '}';
+        return "Предмет: '" + name + '\'' +
+                ", Описание: " + descr;
     }
 }

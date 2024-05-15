@@ -40,11 +40,18 @@ public abstract class Entity {
 
     public void useItem(String itemname) {
         for (AbstractItem item : this.inventory) {
-            if (itemname.compareTo(item.getName()) == 0 && !item.isUsed) {
+            if (itemname.compareTo(item.getName()) == 0 && !item.wasUsed()) {
                 item.useCase(this);
                 break;
             }
         }
+        for (AbstractItem item : this.inventory) {
+            if (itemname.compareTo(item.getName()) == 0) {
+                item.useCase(this);
+                break;
+            }
+        }
+
     }
 
     public void showInventory() {

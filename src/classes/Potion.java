@@ -12,8 +12,8 @@ public class Potion extends AbstractItem{
     @Override
     public void useCase(Entity user) {
         if (!this.wasUsed()) {
-            System.out.println(user.getName() + " выпил(а) зелье: " + this.effect);
-            this.isUsed = true;
+            System.out.println(user.getName() + " выпил(а) зелье: " + this.getEffect());
+            this.setUsed();
         } else {
             System.out.println("Этот стакан оказался пуст...");
         }

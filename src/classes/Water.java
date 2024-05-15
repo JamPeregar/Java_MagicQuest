@@ -12,8 +12,8 @@ public class Water extends AbstractItem{
     @Override
     public void useCase(Entity user) {
         if (!this.wasUsed()) {
-            System.out.println(user.getName() + " промочил(а) горло: " + this.effect);
-            this.isUsed = true;
+            System.out.println(user.getName() + " промочил(а) горло: " + this.getEffect());
+            this.setUsed();
         } else {
             System.out.println("Этот стакан оказался пуст...");
         }

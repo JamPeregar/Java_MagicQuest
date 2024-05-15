@@ -45,13 +45,6 @@ public abstract class Entity {
                 break;
             }
         }
-        for (AbstractItem item : this.inventory) {
-            if (itemname.compareTo(item.getName()) == 0) {
-                item.useCase(this);
-                break;
-            }
-        }
-
     }
 
     public void showInventory() {

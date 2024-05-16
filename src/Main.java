@@ -1,5 +1,7 @@
 import classes.*;
 
+import java.util.ArrayList;
+
 import static java.lang.System.out;
 
 public class Main {
@@ -19,10 +21,6 @@ public class Main {
         AbstractItem potion3 = new Potion("Зелье невидимости", "Загадочный напиток, горький запах", "");
 
         p1.giveItem(water);
-        p1.giveItem(water2);
-        p2.giveItem(potion);
-        p2.giveItem(potion2);
-        p1.showInventory();
         //p1.useItem("Фляга тухлой воды");
         //p1.useItem("Пузырёк воды");
 
@@ -33,11 +31,37 @@ public class Main {
                 this.setFlag();
             }
         };
-        out.println(q1);
-        q1.complete();
-        out.println(q1);
+//        out.println(q1);
+//        q1.complete();
+//        out.println(q1);
 
-        Game game = new Game();
-        game.game();
+//        Game game = new Game();
+//        game.game();
+        ArrayList<String> wizquotes = new ArrayList<>(5);
+        wizquotes.add("Приветсвтую, мой верный программист");
+        wizquotes.add("Куда я дел свои очки?");
+        wizquotes.add("Рад вас видеть");
+        wizquotes.add("СинИмУс потАскИс!");
+        NonPlayableChar defaulter = new NonPlayableChar();
+        defaulter.speak();
+        defaulter.speak();
+        defaulter.speak();
+        NonPlayableChar wizzard = new NonPlayableChar("Wizzard", "Definetly wizzard - wears a pyramid hat!", wizquotes);
+        wizzard.speak();
+        wizzard.speak();
+        wizzard.speak();
+        out.println("ТЕСТ ОБМЕНА");
+        out.println("ИГРОК ДАЁТ ПЕРСУ ДО:");
+        wizzard.showInventory();
+        p1.showInventory();
+        p1.trade(wizzard, water.getName(), true);
+        out.println("ИГРОК ДАЁТ ПЕРСУ ПОСЛЕ:");
+        wizzard.showInventory();
+        p1.showInventory();
+
+        p1.trade(wizzard, water.getName(), false);
+        out.println("ПЕРС ДАЁТ ИГРОКУ ПОСЛЕ");
+        wizzard.showInventory();
+        p1.showInventory();
     }
 }

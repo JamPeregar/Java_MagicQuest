@@ -10,6 +10,12 @@ public abstract class Entity {
     private final String descr;
     protected ArrayList<AbstractItem> inventory= new ArrayList<>();
 
+    public Entity() {
+        this.name = "The Entity";
+        this.descr = "Default entity";
+        //this.inventory = inventory;
+    }
+
     public Entity(final String name, final String descr) {
         this.name = name;
         this.descr = descr;
@@ -29,7 +35,7 @@ public abstract class Entity {
     }
 
     public AbstractItem takeItem(String itemName) {
-        for (AbstractItem item : this.inventory) { // Перебор всех предметов в локации
+        for (AbstractItem item : this.inventory) { // Перебор всех предметов в инвентаре
             if (itemName.compareTo(item.getName()) == 0) { // Если нашли нужный предмет
                 this.inventory.remove(item); // Удаляем его из списка предметов
                 return item; // Возвращаем предмет
@@ -37,6 +43,20 @@ public abstract class Entity {
         }
         return null; // Если предмет не найден, возвращаем null
     }
+
+    public AbstractItem trade(Entity trader, String itemName, boolean toTrader) {
+        //final String traderItem = trader.inventory.get(0).getName();
+        for (AbstractItem item : this.inventory) { // Перебор всех предметов в инвентаре
+            if (itemName.compareTo(item.getName()) == 0) { // Если нашли нужный предмет
+                this.inventory.remove(item); // Удаляем его из списка предметов
+                trader.giveItem(item);
+                return item; // Возвращаем предмет
+            }
+        }
+        return null; // Если предмет не найден, возвращаем null
+    }
+
+
 
     public void useItem(String itemname) {
         for (AbstractItem item : this.inventory) {

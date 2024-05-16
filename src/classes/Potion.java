@@ -15,7 +15,7 @@ public class Potion extends AbstractItem{
             System.out.println(user.getName() + " выпил(а) зелье: " + this.getEffect());
             this.setUsed();
         } else {
-            System.out.println("Этот стакан оказался пуст...");
+            System.out.println("Эта минзурка оказалась пуста...");
         }
     }
 }

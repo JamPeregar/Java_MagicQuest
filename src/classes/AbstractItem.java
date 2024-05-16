@@ -6,6 +6,13 @@ public abstract class AbstractItem {
     private String effect;
     private boolean isUsed = false;
 
+    public AbstractItem() {
+        this.name = "Default Item";
+        this.descr = "Default item zero constructor";
+        this.effect = "Ничего не произошло";
+        //this.inventory = inventory;
+    }
+
     public AbstractItem(final String name, final String descr) {
         this.name = name;
         this.descr = descr;

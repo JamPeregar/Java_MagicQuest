@@ -12,7 +12,7 @@ public class Main {
         out.println(p1.toString());
 
         AbstractItem potion = new Potion("Странное зелье", "Загадочный напиток, горький запах");
-        AbstractItem potion2 = new Potion("Странное зелье", "Загадочный напиток, горький запах", "Проклятие на понос");
+        AbstractItem potion2 = new Potion("Целебное зелье", "Выглядит здорОво", "Здоровье восстановлено");
         AbstractItem water = new Water("Пузырёк воды"
                 , "H2o или просто вода, не забывайте увлажнять организм!"
                 , "+ 1 к здоровью и красноречию!");
@@ -21,6 +21,8 @@ public class Main {
         AbstractItem potion3 = new Potion("Зелье невидимости", "Загадочный напиток, горький запах", "");
 
         p1.giveItem(water);
+        p1.giveItem(potion2);
+        p1.giveItem(water2);
         //p1.useItem("Фляга тухлой воды");
         //p1.useItem("Пузырёк воды");
 
@@ -63,5 +65,16 @@ public class Main {
         out.println("ПЕРС ДАЁТ ИГРОКУ ПОСЛЕ");
         wizzard.showInventory();
         p1.showInventory();
+
+        Furniture chair = new Furniture("Деревянный стул", "Старый стул из досок");
+        Furniture luxchair = new Furniture("Королевский трон", "Новый стул из золота с мягкой обивкой");
+
+        chair.interract(p1);
+        luxchair.interract(wizzard);
+        chair.trade(p1, "Целебное зелье", false);
+        chair.showInventory();
+        Furniture crate = new Crate();
+        crate.interract(p1);
+        p1.useItem("Default Item");
     }
 }

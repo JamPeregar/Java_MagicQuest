@@ -1,6 +1,7 @@
 package classes;
 
 public class Water extends AbstractItem{
+
     public Water(final String name, final String descr) {
         super(name, descr);
     }

@@ -83,7 +83,7 @@ public class Player extends Entity{
         System.out.println("Содержимое вашего инвентаря:");
         if (!inventory.isEmpty()) {
             for (AbstractItem obj : inventory) {
-                System.out.println(obj);
+                System.out.println("\t" + obj);
             }
         } else {System.out.println("Пусто!");}
     }

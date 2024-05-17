@@ -6,8 +6,8 @@ public abstract class AbstractQuest {
     protected boolean passed = false;
 
     public AbstractQuest() {
-        this.name = "Default";
-        this.brief = "Default quest";
+        this.name = "Default Quest";
+        this.brief = "Default quest brief - do something!";
     }
 
     public AbstractQuest(final String name, String brief) {
@@ -44,6 +44,7 @@ public abstract class AbstractQuest {
     }
 
     public abstract void complete();
+
     @Override
     public String toString() {
         return "Задание: " + name + "\nОписание: " + brief + "\nСтатус: " + getStatus();

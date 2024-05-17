@@ -76,5 +76,8 @@ public class Main {
         Furniture crate = new Crate();
         crate.interract(p1);
         p1.useItem("Default Item");
+        AbstractQuest quest = new Quest();
+        p1.giveQuest(quest);
+        out.println(p1.getQuestBrief("Default Quest"));
     }
 }

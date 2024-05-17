@@ -37,8 +37,8 @@ public class Main {
 //        q1.complete();
 //        out.println(q1);
 
-//        Game game = new Game();
-//        game.game();
+        Game game = new Game();
+        game.game();
         ArrayList<String> wizquotes = new ArrayList<>(5);
         wizquotes.add("Приветсвтую, мой верный программист");
         wizquotes.add("Куда я дел свои очки?");

@@ -23,13 +23,14 @@ public class Game {
         while (true) {
             System.out.println("""
                     \nСписок доступных команд:
-                    перейти - (переход в другую локацию)
-                    инвентарь - (показывает ваш инвентарь)
-                    подобрать - (подобрать предмет)
-                    использовать - (использовать предмет)""");
+                    1. перейти - (переход в другую локацию)
+                    2. инвентарь - (показывает ваш инвентарь)
+                    3. подобрать - (подобрать предмет)
+                    4. использовать - (использовать предмет)""");
 
             String command = scanner.nextLine();
             switch (capitalize(command.toLowerCase())){
+                case "1":
                 case "Перейти":
                     System.out.println("Доступные локации для перехода:");
                     for (String direction : currentLocation.getExits().keySet()) {
@@ -47,10 +48,11 @@ public class Game {
                     }
 
                     break;
+                case "2":
                 case "Инвентарь":
                     p1.showInventory();
                     break;
-
+                case "3":
                 case "Подобрать":
                     System.out.println("Доступные предметы для подбора:");
                     for (AbstractItem item : currentLocation.getLocalInventory()) {
@@ -67,6 +69,7 @@ public class Game {
                     }
                     break;
 
+                case "4":
                 case "Использовать":
                     // Код для использования предмета
                     p1.showInventory();

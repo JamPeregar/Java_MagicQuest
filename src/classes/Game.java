@@ -17,7 +17,6 @@ public class Game {
         createPlayers();
         creationLocations();
         createTransitions ();
-        createItems();
 
         Scanner scanner = new Scanner(System.in);
 
@@ -125,13 +124,6 @@ public class Game {
 
     private void createTransitions (){
         home.addBidirectionalExit("Сад", garden, "Дом волшебника");
-    }
-
-    private void createItems (){
-        AbstractItem potion = new Potion("Странное зелье", "Загадочный напиток, горький запах", "Проклятие поноса!");
-        AbstractItem water2 = new Water("Целебное зелье воды", "H2o или просто вода, не забывайте увлажнять организм!", "Здоровье восстановлено");
-        home.addItem(potion);
-        home.addItem(water2);
     }
 
     private void createPlayers(){

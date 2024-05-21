@@ -78,12 +78,19 @@ public class Player extends Entity{
         // Может сделать отдельный Map с именами и количеством?
     }
 
+    public List<AbstractItem> getInventory() {
+        return inventory;
+    }
+
+
     @Override
     public void showInventory() {
         System.out.println("Содержимое вашего инвентаря:");
+        int i = 1;
         if (!inventory.isEmpty()) {
             for (AbstractItem obj : inventory) {
-                System.out.println("\t" + obj);
+                System.out.println("\t" + i + ". " + obj);
+                i++;
             }
         } else {System.out.println("Пусто!");}
     }

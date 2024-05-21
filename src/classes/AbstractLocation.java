@@ -1,23 +1,26 @@
 package classes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class AbstractLocation {
     private final String name;
     private final String descr;
     //protected String[] paths;
-    protected Map<String, Location> exits; // Хранение выходов из текущей локации
+    protected Map<String, AbstractLocation> exits; // Хранение выходов из текущей локации
     protected ArrayList<AbstractItem> localinventory= new ArrayList<>();
 
     public AbstractLocation(final String name, final String dscr, String[] paths) {
         this.name = name;
         this.descr = dscr;
+        this.exits = new HashMap<>();
     }
 
     public AbstractLocation(final String name, final String dscr) {
         this.name = name;
         this.descr = dscr;
+        this.exits = new HashMap<>();
     }
 
     public String getName() {
@@ -28,18 +31,24 @@ public class AbstractLocation {
         return descr;
     }
 
-    public Location go(String direction) {  // Метод для перехода в другую локацию
+    public AbstractLocation go(String direction) {  // Метод для перехода в другую локацию
         return exits.get(direction); // Возвращаем локацию, соответствующую указанному направлению
     }
 
-    public Map<String, Location> getExits() {
+    public Map<String, AbstractLocation> getExits() {
         return exits;
     }  // Получение списка выходов из текущей локации
 
     // Метод добавления выхода из текущей локации
-    public void addExit(String direction, Location destination) {
+    public void addExit(String direction, AbstractLocation destination) {
         exits.put(direction, destination);
     }
+
+    public void addBidirectionalExit(String direction, AbstractLocation destination, String returnDirection) {
+        this.addExit(direction, destination);
+        destination.addExit(returnDirection, this);
+    }
+
 
     // Метод для добавления предмета в локацию
     public void addItem(AbstractItem item) {
@@ -78,5 +87,6 @@ public class AbstractLocation {
 
         return description.toString(); // Возврат полного описания
     }
+
 
 }

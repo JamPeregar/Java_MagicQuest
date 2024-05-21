@@ -1,10 +1,13 @@
 package classes;
+import locations.*;
+import java.util.Map;
+import java.util.List;
 import java.util.Scanner;
 
 public class Game {
 
-    private Location start;
-    private Location garden;
+    private Garden garden;
+    private Home home;
     private Player p1;
     private Player p2;
 
@@ -13,12 +16,12 @@ public class Game {
 
         createPlayers();
         creationLocations();
-        createTransitions();
+        createTransitions ();
         createItems();
 
         Scanner scanner = new Scanner(System.in);
 
-        Location currentLocation = start;//стартовая локация
+        AbstractLocation currentLocation = home;//стартовая локация
         System.out.println(currentLocation);
         while (true) {
             System.out.println("""
@@ -32,21 +35,38 @@ public class Game {
             switch (capitalize(command.toLowerCase())){
                 case "1":
                 case "Перейти":
+                    // Отображение доступных локаций с порядковыми номерами
                     System.out.println("Доступные локации для перехода:");
-                    for (String direction : currentLocation.getExits().keySet()) {
-                        System.out.println(direction);
+                    int index = 1;
+                    Map<String, AbstractLocation> exits = currentLocation.getExits();
+                    for (String direction : exits.keySet()) {
+                        System.out.println(index + ". " + direction);
+                        index++;
                     }
-                    System.out.println("Введите название локации для перехода:");
-                    String chosenLocation = capitalize(scanner.nextLine().toLowerCase());
-                    Location nextLocation = currentLocation.go(chosenLocation);
-                    if (nextLocation != null) {
-                        currentLocation = nextLocation;
-                        System.out.println("Вы прибыли в " + currentLocation.getName());
-                        System.out.println(currentLocation.getDescription());
+                    // Получение порядкового номера выбранной локации
+                    System.out.println("Введите номер локации для перехода:");
+                    int chosenLocationIndex = Integer.parseInt(scanner.nextLine());
+                    if (chosenLocationIndex > 0 && chosenLocationIndex <= exits.size()) {
+                        // Переход к выбранной локации
+                        AbstractLocation nextLocation = null;
+                        int count = 1;
+                        for (Map.Entry<String, AbstractLocation> entry : exits.entrySet()) {
+                            if (count == chosenLocationIndex) {
+                                nextLocation = entry.getValue();
+                                break;
+                            }
+                            count++;
+                        }
+                        if (nextLocation != null) {
+                            currentLocation = nextLocation;
+                            System.out.println("Вы прибыли в " + currentLocation.getName());
+                            System.out.println(currentLocation.getDescription());
+                        } else {
+                            System.out.println("Ошибка при выборе локации.");
+                        }
                     } else {
-                        System.out.println("Неверное название локации.");
+                        System.out.println("Неверный номер локации.");
                     }
-
                     break;
                 case "2":
                 case "Инвентарь":
@@ -54,28 +74,43 @@ public class Game {
                     break;
                 case "3":
                 case "Подобрать":
+                    // Отображение доступных предметов с порядковыми номерами
                     System.out.println("Доступные предметы для подбора:");
-                    for (AbstractItem item : currentLocation.getLocalInventory()) {
-                        System.out.println(item.getName());
+                    int itemIndex = 1;
+                    List<AbstractItem> localInventory = currentLocation.getLocalInventory();
+                    for (AbstractItem item : localInventory) {
+                        System.out.println(itemIndex + ". " + item.getName());
+                        itemIndex++;
                     }
-                    System.out.println("Введите название предмета, который хотите подобрать:");
-                    String itemName = capitalize(scanner.nextLine().toLowerCase());
-                    AbstractItem pickedItem = currentLocation.takeItem(itemName);
-                    if (pickedItem != null) {
-                        p1.giveItem(pickedItem);
-                        System.out.println("Вы подобрали: " + pickedItem.getName());
+                    // Получение порядкового номера выбранного предмета
+                    System.out.println("Введите номер предмета, который хотите подобрать:");
+                    int chosenItemIndex = Integer.parseInt(scanner.nextLine());
+                    if (chosenItemIndex > 0 && chosenItemIndex <= localInventory.size()) {
+                        // Подбор выбранного предмета
+                        AbstractItem pickedItem = localInventory.get(chosenItemIndex - 1);
+                        if (pickedItem != null) {
+                            currentLocation.takeItem(pickedItem.getName());
+                            p1.giveItem(pickedItem);
+                            System.out.println("Вы подобрали: " + pickedItem.getName());
+                        } else {
+                            System.out.println("Ошибка при подборе предмета.");
+                        }
                     } else {
-                        System.out.println("Такого предмета нет в локации.");
+                        System.out.println("Неверный номер предмета.");
                     }
                     break;
-
                 case "4":
                 case "Использовать":
                     // Код для использования предмета
                     p1.showInventory();
-                    System.out.println("Введите название предмета, который хотите использовать:");
-                    String itemNameToUse = capitalize(scanner.nextLine().toLowerCase());
-                    p1.useItem(itemNameToUse);
+                    System.out.println("Введите номер предмета, который хотите использовать:");
+                    int selectedIndex = Integer.parseInt(scanner.nextLine());
+                    if (selectedIndex >= 1 && selectedIndex <= p1.getInventory().size()) {
+                        AbstractItem itemToUse = p1.getInventory().get(selectedIndex - 1); // Поиск предмета по индексу
+                        p1.useItem(itemToUse.getName()); // Использование предмета
+                    } else {
+                        System.out.println("Неверный номер предмета.");
+                    }
                     break;
 
             }
@@ -83,24 +118,20 @@ public class Game {
         }
     }
     private void creationLocations (){
-        start = new Location("Начальная локация", "Вы находитесь в начальной точке");
-        garden = new Location("Сад",
-                "Вы находитесь в уютном саду, окруженном цветущими растениями и ароматными цветами. Птицы щебечут на деревьях, а солнечные лучи проникают сквозь листву, создавая игривые тени на земле");
+        home = new Home();
+        garden = new Garden();
 
     }
 
     private void createTransitions (){
-        start.addExit("Сад", garden);
-        garden.addExit("Начальная локация", start);
+        home.addBidirectionalExit("Сад", garden, "Дом волшебника");
     }
 
     private void createItems (){
         AbstractItem potion = new Potion("Странное зелье", "Загадочный напиток, горький запах", "Проклятие поноса!");
-        AbstractItem water = new Water("Пузырёк воды", "H2o или просто вода, не забывайте увлажнять организм!", "Получен заряд бодрости");
         AbstractItem water2 = new Water("Целебное зелье воды", "H2o или просто вода, не забывайте увлажнять организм!", "Здоровье восстановлено");
-        start.addItem(potion);
-        garden.addItem(water);
-        start.addItem(water2);
+        home.addItem(potion);
+        home.addItem(water2);
     }
 
     private void createPlayers(){

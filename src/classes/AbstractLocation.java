@@ -10,6 +10,7 @@ public abstract class AbstractLocation {
     //protected String[] paths;
     protected Map<String, AbstractLocation> exits; // Хранение выходов из текущей локации
     protected ArrayList<AbstractItem> localinventory= new ArrayList<>();
+    protected ArrayList<NonPlayableChar> localNPCs= new ArrayList<>();
 
     public AbstractLocation(final String name, final String dscr, String[] paths) {
         this.name = name;
@@ -55,6 +56,11 @@ public abstract class AbstractLocation {
         localinventory.add(item); // Добавляем предмет в список предметов текущей локации
     }
 
+    // Метод для добавления НПС в локацию
+    public void addNPC(NonPlayableChar npc) {
+        localNPCs.add(npc);
+    }
+
     // Метод для получения локального инвентаря локации
     public ArrayList<AbstractItem> getLocalInventory() {
         return localinventory;
@@ -87,7 +93,12 @@ public abstract class AbstractLocation {
 
         description.append("\nОбъекты в локации:"); // Добавление информации о предметах
         for (AbstractItem item : localinventory) { // Перебор всех предметов
-            description.append("\n").append(item.getName()); // Добавление информации о каждом предмете
+            description.append("\n\t").append(item.getName()); // Добавление информации о каждом предмете
+        }
+
+        description.append("\nДоступные НПС в локации:"); // Добавление информации о предметах
+        for (NonPlayableChar npc : localNPCs) { // Перебор всех предметов
+            description.append("\n\t").append(npc.getName()); // Добавление информации о каждом предмете
         }
 
         return description.toString(); // Возврат полного описания

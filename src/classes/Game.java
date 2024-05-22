@@ -113,7 +113,7 @@ public class Game {
                     }
                     break;
                 case "5":
-                case "":
+                case "Подойти к НПС":
 
 
             }
@@ -135,6 +135,10 @@ public class Game {
     private void createPlayers(){
         p1 = Player.createPlayer("Nik", "Student");
         p2 = Player.createPlayer("Rin", "Student");
+    }
+
+    private void initializeNPCs(){
+
     }
 
     private static String capitalize(String inputString) {

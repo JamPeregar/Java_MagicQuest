@@ -13,7 +13,7 @@ public class Furniture extends Entity implements Interractable {
     public Furniture(String name, String descr) {
         super(name, descr);
     }
-    
+
     @Override
     public void interract(Entity interractor) {
         System.out.println(interractor.getName() + " пнул(а) " + this.getName());

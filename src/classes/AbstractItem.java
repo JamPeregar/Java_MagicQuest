@@ -31,8 +31,16 @@ public abstract class AbstractItem {
         return name;
     }
 
+    public void setName(final String rename) {
+         this.name = rename;
+    }
+
     public String getDescr() {
         return descr;
+    }
+
+    public void setDescr(final String redescr) {
+        this.descr = redescr;
     }
 
     public boolean wasUsed() {
@@ -45,6 +53,10 @@ public abstract class AbstractItem {
 
     public String getEffect() {
         return effect;
+    }
+
+    public void setEffect(final String reeffect) {
+        this.effect = reeffect;
     }
 
     public abstract void useCase(Entity user); // Когда предмет будет использован персонажем.

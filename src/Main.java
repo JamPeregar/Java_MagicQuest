@@ -30,12 +30,12 @@ public class Main {
         };
         woodencrate.interract(p1);
         demoncrate.interract(p1);
+        NonPlayableChar wiz = new NonPlayableChar();
         p1.showInventory();
-        out.println(p1.getHealth());
-        p1.useItem("Яд");
-        p1.useItem("Бутылка воды");
-        p1.useItem("Странное зелье");
-        out.println(p1.getHealth());
+        wiz.showInventory();
+        p1.trade(wiz, "Пузырёк воды", true);
+        p1.showInventory();
+        wiz.showInventory();
         //game.game();
     }
 }

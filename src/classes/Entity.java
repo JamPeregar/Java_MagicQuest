@@ -1,9 +1,6 @@
 package classes;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class Entity {
     private final String name;
@@ -57,30 +54,28 @@ public abstract class Entity {
         return null; // Если предмет не найден, возвращаем null
     }
 
-    public AbstractItem trade(Entity trader, String itemName, boolean toTrader) {
-        //final String traderItem = trader.inventory.get(0).getName();
+    public void trade(Entity trader, String itemName, boolean toTrader) {
 
         if (toTrader) {
-            for (AbstractItem item : this.inventory) { // Перебор всех предметов в инвентаре
+            final Iterator iterator = this.inventory.iterator();
+            while (iterator.hasNext()) {
+                AbstractItem item = (AbstractItem) iterator.next();
                 if (itemName.compareTo(item.getName()) == 0) { // Если нашли нужный предмет
-                    this.inventory.remove(item); // Удаляем его из списка предметов
                     trader.giveItem(item);
-                    return item; // Возвращаем предмет
+                    iterator.remove(); // Удаляем его из списка предметов
                 }
             }
         } else {
-            for (AbstractItem item : trader.inventory) { // Перебор всех предметов в инвентаре
+            final Iterator iterator = trader.inventory.iterator();
+            while (iterator.hasNext()) {
+                AbstractItem item = (AbstractItem) iterator.next();
                 if (itemName.compareTo(item.getName()) == 0) { // Если нашли нужный предмет
-                    trader.inventory.remove(item); // Удаляем его из списка предметов
                     this.giveItem(item);
-                    return item; // Возвращаем предмет
+                    iterator.remove(); //Удаляем предмет
                 }
             }
-        }
-        return null; // Если предмет не найден, возвращаем null
+        } // Конец обмена
     }
-
-
 
     public void useItem(String itemname) {
         for (AbstractItem item : this.inventory) {

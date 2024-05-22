@@ -2,6 +2,8 @@ package classes;
 
 import interfaces.Interractable;
 
+import java.util.Iterator;
+
 public class Furniture extends Entity implements Interractable {
 
     public Furniture() {
@@ -13,13 +15,25 @@ public class Furniture extends Entity implements Interractable {
     }
 
     @Override
-    public AbstractItem trade(Entity trader, String itemName, boolean toTrader) {
-        AbstractItem item = super.trade(trader, itemName, toTrader);
-        if (item != null) {
-            System.out.println(trader.getName() + " положил(а) " + itemName + " в(на) " + this.getName());
-            return item;
+    public void trade(Entity trader, String itemName, boolean toTrader) {
+        if (toTrader) {
+            final Iterator iterator = this.inventory.iterator();
+            while (iterator.hasNext()) {
+                AbstractItem item = (AbstractItem) iterator.next();
+                if (itemName.compareTo(item.getName()) == 0) { // Если нашли нужный предмет
+                    trader.giveItem(item);
+                    iterator.remove();
+                }
+            }
         } else {
-            return null;
+            final Iterator iterator = trader.inventory.iterator();
+            while (iterator.hasNext()) {
+                AbstractItem item = (AbstractItem) iterator.next();
+                if (itemName.compareTo(item.getName()) == 0) { // Если нашли нужный предмет
+                    this.giveItem(item);
+                    iterator.remove();
+                }
+            }
         }
     }
 

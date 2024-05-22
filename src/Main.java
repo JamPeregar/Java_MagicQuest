@@ -11,8 +11,6 @@ public class Main {
         Player p2 = Player.createPlayer("Rin", "Student");
         out.println(p1.toString());
 
-        AbstractItem potion = new Potion("Странное зелье", "Загадочный напиток, горький запах");
-        AbstractItem potion2 = new Potion("Целебное зелье", "Выглядит здорОво", "Здоровье восстановлено");
         AbstractItem water = new Water("Пузырёк воды"
                 , "H2o или просто вода, не забывайте увлажнять организм!"
                 , "+ 1 к здоровью и красноречию!");
@@ -21,8 +19,8 @@ public class Main {
         AbstractItem potion3 = new Potion("Зелье невидимости", "Загадочный напиток, горький запах", "");
 
         p1.giveItem(water);
-        p1.giveItem(potion2);
-        p1.giveItem(water2);
+//        p1.giveItem(potion2);
+//        p1.giveItem(water2);
         //p1.useItem("Фляга тухлой воды");
         //p1.useItem("Пузырёк воды");
 

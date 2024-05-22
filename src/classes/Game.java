@@ -8,6 +8,7 @@ public class Game {
 
     private Garden garden;
     private Home home;
+    private AtticHomeWizard atticHW;
     private Player p1;
     private Player p2;
 
@@ -111,6 +112,9 @@ public class Game {
                         System.out.println("Неверный номер предмета.");
                     }
                     break;
+                case "5":
+                case "":
+
 
             }
 
@@ -119,11 +123,13 @@ public class Game {
     private void creationLocations (){
         home = new Home();
         garden = new Garden();
+        atticHW = new AtticHomeWizard();
 
     }
 
     private void createTransitions (){
         home.addBidirectionalExit("Сад", garden, "Дом волшебника");
+        home.addBidirectionalExit("Чердак", atticHW, "Дом волшебника");
     }
 
     private void createPlayers(){

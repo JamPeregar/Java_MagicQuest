@@ -12,7 +12,11 @@ public class Home extends AbstractLocation {
     @Override
     public void initializeItems() {
         AbstractItem water = new Water("Пузырёк воды", "H2o или просто вода, не забывайте увлажнять организм!", "Получен заряд бодрости");
+        AbstractItem potion = new Potion("Странное зелье", "Загадочный напиток, горький запах");
+        AbstractItem potion2 = new Potion("Целебное зелье", "Выглядит здорОво", "Здоровье восстановлено");
         this.addItem(water);
+        this.addItem(potion);
+        this.addItem(potion2);
     }
 
     @Override

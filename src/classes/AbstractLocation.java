@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AbstractLocation {
+public abstract class AbstractLocation {
     private final String name;
     private final String descr;
     //protected String[] paths;
@@ -70,6 +70,11 @@ public class AbstractLocation {
         }
         return null; // Если предмет не найден, возвращаем null
     }
+
+    public abstract void initializeItems();//Метод для инициазизации предметов
+
+    // Метод для инициализации NPC
+    public abstract void initializeNPCs();
 
     @Override
     public String toString() {

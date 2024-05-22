@@ -12,14 +12,14 @@ public class Garden extends AbstractLocation {
         initializeNPCs();
     }
 
-
-    private void initializeItems() {
+    @Override
+    public void initializeItems() {
         AbstractItem water = new Water("Пузырёк воды", "H2o или просто вода, не забывайте увлажнять организм!", "Получен заряд бодрости");
         this.addItem(water);
     }
 
-    // Метод для инициализации NPC (пока пустой, для будущего расширения)
-    private void initializeNPCs() {
+    @Override
+    public void initializeNPCs() {
 
     }
 }

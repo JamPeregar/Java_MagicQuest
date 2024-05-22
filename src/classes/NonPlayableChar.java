@@ -25,7 +25,11 @@ public class NonPlayableChar extends Entity{
     }
 
     public void speak() {
-        System.out.println(this.getName() + ": " + this.quotelist.get(getLocalRandom(this.quotelist.size())));
+        if (this.isAlive()) {
+            System.out.println(this.getName() + ": " + this.quotelist.get(getLocalRandom(this.quotelist.size())));
+        } else  {
+            System.out.println(this.getName() + ": " + "bro, im dead");
+        }
     }
 
     private static int getLocalRandom(int seed) {

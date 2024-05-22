@@ -8,6 +8,7 @@ import java.util.Map;
 public abstract class Entity {
     private final String name;
     private final String descr;
+    private int hp = 100;
     protected ArrayList<AbstractItem> inventory= new ArrayList<>();
 
     public Entity() {
@@ -27,6 +28,18 @@ public abstract class Entity {
 
     public String getDescr() {
         return descr;
+    }
+
+    public int getHealth() {
+        return hp;
+    }
+
+    public boolean isAlive() {
+        return hp > 0;
+    }
+
+    public void addHealth(final int points) {
+        if (hp > 0 && hp <= 100) this.hp += points;
     }
 
     public void giveItem(AbstractItem item) {

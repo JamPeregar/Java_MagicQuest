@@ -1,7 +1,7 @@
 package classes;
 
 public class Potion extends AbstractItem{
-
+    private int hp_effect = 10;
     public Potion(final String name, final String descr) {
         super(name, descr);
     }

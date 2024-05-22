@@ -16,7 +16,7 @@ public class Main {
                 , "+ 1 к здоровью и красноречию!");
         AbstractItem water2 = new Water("Фляга тухлой воды", "Тухлая вода - гадость! - 2 к здоровью и запаху из рта",
                 "+ тошнота, - 1 к здоровью");
-        AbstractItem potion3 = new Potion("Зелье невидимости", "Загадочный напиток, горький запах", "");
+        AbstractItem poison = new Poison("Яд", "Загадочный напиток, горький запах", "Отравление", -9999);
 
         p1.giveItem(water);
 //        p1.giveItem(potion2);
@@ -76,6 +76,10 @@ public class Main {
         p1.useItem("Default Item");
         AbstractQuest quest = new Quest();
         p1.giveQuest(quest);
-        out.println(p1.getQuestBrief("Default Quest"));
+        wizzard.giveItem(poison);
+        wizzard.showInventory();
+        wizzard.useItem("Яд");
+        wizzard.speak();
+        out.println(wizzard.getHealth());
     }
 }

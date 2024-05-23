@@ -36,6 +36,9 @@ public class Main {
         p1.trade(wiz, "Пузырёк воды", true);
         p1.showInventory();
         wiz.showInventory();
-        //game.game();
+        p1.trade(woodencrate, "Яд", true);
+        woodencrate.showInventory();
+        Game game = new Game();
+        game.game();
     }
 }

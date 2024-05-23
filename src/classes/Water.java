@@ -22,8 +22,8 @@ public class Water extends AbstractItem{
     @Override
     public void useCase(Entity user) {
         if (!this.wasUsed()) {
-            System.out.println(user.getName() + " промочил(а) горло: " + this.getEffect());
             if (user.getHealth() < 100) {
+                System.out.println(user.getName() + " промочил(а) горло: " + this.getEffect());
                 user.addHealth(hp_effect);
                 this.setUsed();
             } else {

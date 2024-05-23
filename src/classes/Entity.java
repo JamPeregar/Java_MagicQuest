@@ -63,6 +63,7 @@ public abstract class Entity {
                 if (itemName.compareTo(item.getName()) == 0) { // Если нашли нужный предмет
                     trader.giveItem(item);
                     iterator.remove(); // Удаляем его из списка предметов
+                    break;
                 }
             }
         } else {
@@ -72,14 +73,17 @@ public abstract class Entity {
                 if (itemName.compareTo(item.getName()) == 0) { // Если нашли нужный предмет
                     this.giveItem(item);
                     iterator.remove(); //Удаляем предмет
+                    break;
                 }
             }
         } // Конец обмена
     }
 
-    public void useItem(String itemname) {
-        for (AbstractItem item : this.inventory) {
-            if (itemname.compareTo(item.getName()) == 0 && !item.wasUsed()) {
+    public void useItem(String itemName) {
+        final Iterator iterator = this.inventory.iterator();
+        while (iterator.hasNext()) {
+            AbstractItem item = (AbstractItem) iterator.next();
+            if (itemName.compareTo(item.getName()) == 0 && !item.wasUsed()) { // Если нашли нужный предмет
                 item.useCase(this);
                 break;
             }

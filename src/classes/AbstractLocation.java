@@ -2,6 +2,7 @@ package classes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public abstract class AbstractLocation {
@@ -68,10 +69,12 @@ public abstract class AbstractLocation {
 
     // Метод для взятия предмета из локации
     public AbstractItem takeItem(String itemName) {
-        for (AbstractItem item : localinventory) { // Перебор всех предметов в локации
-            if (item.getName().equals(itemName)) { // Если нашли нужный предмет
-                localinventory.remove(item); // Удаляем его из списка предметов
-                return item; // Возвращаем предмет
+        final Iterator iterator = this.localinventory.iterator();
+        while (iterator.hasNext()) {
+            AbstractItem item = (AbstractItem) iterator.next();
+            if (itemName.compareTo(item.getName()) == 0) { // Если нашли нужный предмет
+                iterator.remove(); // Удаляем его из списка предметов
+                return item;
             }
         }
         return null; // Если предмет не найден, возвращаем null

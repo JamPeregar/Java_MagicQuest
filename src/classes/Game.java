@@ -195,10 +195,6 @@ public class Game {
 
     private void createPlayers(){
         p1 = Player.createPlayer("Nik", "Student");
-<<<<<<< HEAD
-=======
-
->>>>>>> f29e15d583effd8914b9c9ccb5ab7dd298eba442
     }
 
     private void initializeNPCs(){

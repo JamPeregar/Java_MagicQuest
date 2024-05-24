@@ -17,8 +17,6 @@ public class Main {
         p1.giveItem(water);
         p1.giveItem(potion);
         Crate woodencrate = new Crate("Деревянный ящик", "Это определённо магическое дерево");
-<<<<<<< HEAD
-=======
         Crate demoncrate = new Crate("Адский ящик", "Это определённо адский камень") {
             @Override
             public void interract(Entity interractor) {
@@ -28,7 +26,6 @@ public class Main {
             }
         };
         AbstractItem[] itemsforquest = {poison, water, potion};
->>>>>>> f29e15d583effd8914b9c9ccb5ab7dd298eba442
         woodencrate.interract(p1);
 
         NonPlayableChar wiz = new NonPlayableChar();

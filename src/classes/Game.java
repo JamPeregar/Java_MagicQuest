@@ -1,6 +1,8 @@
 package classes;
 import interfaces.Interractable;
 import locations.*;
+
+import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.Scanner;
@@ -13,6 +15,7 @@ public class Game {
     private AtticHomeWizard atticHW;
     private ElementalQuest quest1;
     private Player p1;
+
 
     //Controls game, catch player commands
     public void game() throws InterruptedException {
@@ -143,7 +146,7 @@ public class Game {
                                     npc.speak();
                                     break;
                                 case "2":
-                                    System.out.println("Вы приняли квест: " + quest1.getName());
+                                    System.out.println("Вы приняли квест: " + quest1.getName() + "\n" + quest1.getBrief());
                                     break;
                                 case "3":
                                     if (quest1.questcheck(p1)) {

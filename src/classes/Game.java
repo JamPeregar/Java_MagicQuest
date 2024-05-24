@@ -10,14 +10,16 @@ public class Game {
     private Home home;
     private AtticHomeWizard atticHW;
     private Player p1;
-    private Player p2;
 
     //Controls game, catch player commands
     public void game(){
 
-        createPlayers();
-        creationLocations();
-        createTransitions ();
+        {
+            createPlayers();
+            creationLocations();
+            createTransitions();
+            initializeNPCs();
+        }
 
         Scanner scanner = new Scanner(System.in);
 
@@ -134,11 +136,12 @@ public class Game {
 
     private void createPlayers(){
         p1 = Player.createPlayer("Nik", "Student");
-        p2 = Player.createPlayer("Rin", "Student");
+
     }
 
     private void initializeNPCs(){
-
+        Entity wizzzrd = new NonPlayableChar();
+        Crate woodencrate = new Crate("Деревянный ящик", "Это определённо магическое дерево");
     }
 
     private static String capitalize(String inputString) {

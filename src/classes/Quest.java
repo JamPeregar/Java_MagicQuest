@@ -12,6 +12,6 @@ public class Quest extends AbstractQuest{
 
     @Override
     public void complete() {
-        if (this.getFlag()) this.setFlag();
+        if (!this.getFlag()) this.setFlag();
     }
 }

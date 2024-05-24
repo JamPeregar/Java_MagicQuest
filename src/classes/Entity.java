@@ -44,14 +44,15 @@ public abstract class Entity {
         //this.pubinventory.put(item.getName(), 1);
     }
 
-    public AbstractItem takeItem(String itemName) {
-        for (AbstractItem item : this.inventory) { // Перебор всех предметов в инвентаре
+    public void takeItem(String itemName) {
+        final Iterator iterator = this.inventory.iterator();
+        while (iterator.hasNext()) {
+            AbstractItem item = (AbstractItem) iterator.next();
             if (itemName.compareTo(item.getName()) == 0) { // Если нашли нужный предмет
-                this.inventory.remove(item); // Удаляем его из списка предметов
-                return item; // Возвращаем предмет
+                iterator.remove(); // Удаляем его из списка предметов
+                break;
             }
         }
-        return null; // Если предмет не найден, возвращаем null
     }
 
     public void trade(Entity trader, String itemName, boolean toTrader) {

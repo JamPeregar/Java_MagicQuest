@@ -28,17 +28,15 @@ public class Main {
                 System.out.println("В ящике найдено: " + item.getName());
             }
         };
+        AbstractItem[] itemsforquest = {poison, water, potion};
         woodencrate.interract(p1);
         demoncrate.interract(p1);
         NonPlayableChar wiz = new NonPlayableChar();
+        ElementalQuest quest = new ElementalQuest("Test", "Testing");
+        quest.addquestitem(itemsforquest);
+        p1.takeItem("Яд");
         p1.showInventory();
-        wiz.showInventory();
-        p1.trade(wiz, "Пузырёк воды", true);
-        p1.showInventory();
-        wiz.showInventory();
-        p1.trade(woodencrate, "Яд", true);
-        woodencrate.showInventory();
-        Game game = new Game();
-        game.game();
+        out.println(quest.questcheck(p1));
+
     }
 }

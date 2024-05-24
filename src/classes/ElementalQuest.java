@@ -51,8 +51,8 @@ public class ElementalQuest extends AbstractQuest{
                 }
             }
         }
-        if (itemnum == itemcount) {
-
+        if (itemnum <= itemcount) {
+            this.complete();
             return true;
         } else {
             return false;

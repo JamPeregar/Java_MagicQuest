@@ -34,7 +34,7 @@ public class Main {
         NonPlayableChar wiz = new NonPlayableChar();
         ElementalQuest quest = new ElementalQuest("Test", "Testing");
         quest.addquestitem(itemsforquest);
-        p1.takeItem("Яд");
+        //p1.takeItem("Яд");
         p1.showInventory();
         out.println(quest.questcheck(p1));
 

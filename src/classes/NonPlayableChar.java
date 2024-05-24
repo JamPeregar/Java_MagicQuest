@@ -35,5 +35,8 @@ public class NonPlayableChar extends Entity{
     private static int getLocalRandom(int seed) {
         return (int) (Math.random() * seed);
     }
+    public String getDescription() {
+        return this.getDescr();
+    }
 
 }

@@ -31,7 +31,8 @@ public class Game {
                     1. перейти - (переход в другую локацию)
                     2. инвентарь - (показывает ваш инвентарь)
                     3. подобрать - (подобрать предмет)
-                    4. использовать - (использовать предмет)""");
+                    4. использовать - (использовать предмет)
+                    5. Подойти к НПС""");
 
             String command = scanner.nextLine();
             switch (capitalize(command.toLowerCase())){
@@ -116,6 +117,33 @@ public class Game {
                     break;
                 case "5":
                 case "Подойти к НПС":
+                    System.out.println("Доступные НПС для взаимодействия:");
+                    if (!currentLocation.getLocalNPCs().isEmpty()) {
+                        for (int i = 0; i < currentLocation.getLocalNPCs().size(); i++) {
+                            NonPlayableChar npc = currentLocation.getLocalNPCs().get(i);
+                            System.out.println((i + 1) + ". " + npc.getName() + ": " + npc.getDescription());
+                        }
+                        System.out.println("Введите номер НПС, к которому хотите подойти:");
+                        int npcIndex = Integer.parseInt(scanner.nextLine()) - 1;
+                        if (npcIndex >= 0 && npcIndex < currentLocation.getLocalNPCs().size()) {
+                            NonPlayableChar npc = currentLocation.getLocalNPCs().get(npcIndex);
+                            System.out.println("1. Поговорить\n2. Квест");
+                            String command2 = scanner.nextLine();
+                            switch (capitalize(command2.toLowerCase())){
+                                case "1":
+                                    npc.speak();
+                                    break;
+                                case "2":
+                                    System.out.println("тут должена быть квестовая система");
+                                    break;
+                            }
+                        } else {
+                            System.out.println("Неверный номер НПС.");
+                        }
+                    } else {
+                        System.out.println("В этой локации нет НПС.");
+                    }
+                    break;
 
 
             }

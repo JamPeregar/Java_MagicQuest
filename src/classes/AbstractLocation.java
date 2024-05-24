@@ -67,6 +67,11 @@ public abstract class AbstractLocation {
         return localinventory;
     }
 
+    // Метод для получения НПС в локации
+    public ArrayList<NonPlayableChar> getLocalNPCs() {
+        return localNPCs;
+    }
+
     // Метод для взятия предмета из локации
     public AbstractItem takeItem(String itemName) {
         final Iterator iterator = this.localinventory.iterator();
@@ -91,7 +96,7 @@ public abstract class AbstractLocation {
         StringBuilder description = new StringBuilder("\nЛокация: " + this.name + "\nОписание: " + this.descr);
         description.append("\nПереходы:"); // Добавление информации о выходах
         for (String direction : exits.keySet()) { // Перебор всех выходов
-            description.append("\n").append(direction); // Добавление информации о каждом выходе
+            description.append("\n\t").append(direction); // Добавление информации о каждом выходе
         }
 
         description.append("\nОбъекты в локации:"); // Добавление информации о предметах

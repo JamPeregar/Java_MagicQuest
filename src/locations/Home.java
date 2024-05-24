@@ -36,7 +36,20 @@ public class Home extends AbstractLocation {
     public void initializeObjects(){
         Furniture chair = new Furniture("Деревянный стул","Обычный добротный деревянный стул");
         this.addObject(chair);
-        Furniture table = new Furniture("Деревянный стол","Качественный деревянный стол из необычной породы дерева");
+        Furniture table = new Furniture("Деревянный стол","Качественный деревянный стол из необычной породы дерева"){
+            private boolean taken = false;
+            @Override
+            public void interract(Entity interractor) {
+                if (!taken) {
+                    AbstractItem item = new Potion();
+                    interractor.giveItem(item);
+                    System.out.println("На столе найден: " + item.getName());
+                    taken = true;
+                } else {
+                    System.out.println("Стол уже осмотрен.");
+                }
+            }
+        };
         this.addObject(table);
     }
 }

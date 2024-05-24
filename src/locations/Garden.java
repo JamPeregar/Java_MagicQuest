@@ -26,6 +26,14 @@ public class Garden extends AbstractLocation {
 
     @Override
     public void initializeObjects(){
-
+        Furniture well = new Furniture("Колодец","Красивый колодец, в котором можно набрать воды."){
+            @Override
+            public void interract(Entity interractor) {
+                AbstractItem item = new Water();
+                interractor.giveItem(item);
+                System.out.println("Вы получили: " + item.getName());
+            }
+        };
+        this.addObject(well);
     }
 }

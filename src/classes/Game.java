@@ -9,8 +9,9 @@ public class Game {
 
     private Garden garden;
     private Home home;
-    private final int timeSleep = 2000;
+    private final int timeSleep = 1300;
     private AtticHomeWizard atticHW;
+    private ElementalQuest quest1;
     private Player p1;
 
     //Controls game, catch player commands
@@ -20,7 +21,7 @@ public class Game {
             createPlayers();
             creationLocations();
             createTransitions();
-            initializeNPCs();
+            initializeQuests();
         }
 
         Scanner scanner = new Scanner(System.in);
@@ -134,7 +135,7 @@ public class Game {
                         int npcIndex = Integer.parseInt(scanner.nextLine()) - 1;
                         if (npcIndex >= 0 && npcIndex < currentLocation.getLocalNPCs().size()) {
                             NonPlayableChar npc = currentLocation.getLocalNPCs().get(npcIndex);
-                            System.out.println("\t1. Поговорить\n\t2. Квест");
+                            System.out.println("\t1. Поговорить\n\t2. Принять квест\n\t3. Сдать квест");
                             System.out.print("> ");
                             String command2 = scanner.nextLine();
                             switch (capitalize(command2.toLowerCase())){
@@ -142,7 +143,14 @@ public class Game {
                                     npc.speak();
                                     break;
                                 case "2":
-                                    System.out.println("тут должена быть квестовая система");
+                                    System.out.println("Вы приняли квест: " + quest1.getName());
+                                    break;
+                                case "3":
+                                    if (quest1.questcheck(p1)) {
+                                        System.out.println("Вы сдали квест: " + quest1.getName());
+                                    } else {
+                                        System.out.println("Вы еще не выполнили все условия для этого квеста.");
+                                    }
                                     break;
                             }
                         } else {
@@ -153,22 +161,21 @@ public class Game {
                     }
                     Thread.sleep(timeSleep);
                     break;
+
                 case "6":
                 case "Осмотреть объект":
                     System.out.println("Доступные объекты в локации:");
-                    for (Interractable object : currentLocation.getLocalObjects()) {
-                        System.out.println(object.getName());
+                    for (int i = 0; i < currentLocation.getLocalObjects().size(); i++) {
+                        Interractable object = currentLocation.getLocalObjects().get(i);
+                        System.out.println("\t"+(i + 1) + ". " + object.getName());
                     }
-                    System.out.println("Введите название объекта для взаимодействия:");
-                    String objectName = capitalize(scanner.nextLine().toLowerCase());
-                    Interractable object = currentLocation.getLocalObjects().stream()
-                            .filter(o -> o.getName().equalsIgnoreCase(objectName))
-                            .findFirst()
-                            .orElse(null);
-                    if (object != null) {
+                    System.out.println("Введите номер объекта для взаимодействия:");
+                    int objectIndex = Integer.parseInt(scanner.nextLine());
+                    if (objectIndex > 0 && objectIndex <= currentLocation.getLocalObjects().size()) {
+                        Interractable object = currentLocation.getLocalObjects().get(objectIndex - 1);
                         object.interract(p1);
                     } else {
-                        System.out.println("Объект не найден.");
+                        System.out.println("Неверный номер объекта.");
                     }
                     Thread.sleep(timeSleep);
                     break;
@@ -197,9 +204,14 @@ public class Game {
         p1 = Player.createPlayer("Nik", "Student");
     }
 
-    private void initializeNPCs(){
-        Entity wizzzrd = new NonPlayableChar();
-        Crate woodencrate = new Crate("Деревянный ящик", "Это определённо магическое дерево");
+    private void initializeQuests(){
+        quest1 = new ElementalQuest("Помощь волшебнику.", "Нужно найти и принести волшебнику: яд, воду и зелье.");
+        AbstractItem poison = new Poison();
+        AbstractItem water = new Water();
+        AbstractItem potion = new Potion();
+        AbstractItem[] itemsforquest1 = {poison, water, potion};
+        quest1.addquestitem(itemsforquest1);
+
     }
 
     private static String capitalize(String inputString) {

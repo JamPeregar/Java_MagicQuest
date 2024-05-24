@@ -32,6 +32,10 @@ public class NonPlayableChar extends Entity{
         }
     }
 
+    public void passQuest(AbstractItem[] items) {
+
+    }
+
     private static int getLocalRandom(int seed) {
         return (int) (Math.random() * seed);
     }

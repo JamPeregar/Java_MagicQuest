@@ -1,9 +1,12 @@
 package classes;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class AbstractQuest {
-    protected String name;
-    protected String brief;
-    protected boolean passed = false;
+    private String name;
+    private String brief;
+    private boolean passed = false;
 
     public AbstractQuest() {
         this.name = "Default Quest";

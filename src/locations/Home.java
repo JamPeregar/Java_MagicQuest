@@ -9,6 +9,7 @@ public class Home extends AbstractLocation {
         super("Дом", "Вы находитесь в доме волшебника. Здесь пахнет магией и древними книгами.\nПовсюду расставлены странные артефакты и колбы с загадочными жидкостями.\nМягкий свет от ламп освещает помещение, создавая уютную, но немного таинственную атмосферу.");
         initializeItems();
         initializeNPCs();
+        initializeObjects();
     }
 
     @Override
@@ -29,5 +30,13 @@ public class Home extends AbstractLocation {
         wizardQuotes.add("Если ты здесь, значит, у тебя есть вопросы.");
         NonPlayableChar wizard = new NonPlayableChar("Волшебник", "Старый мудрый волшебник с длинной бородой.", wizardQuotes);
         this.addNPC(wizard);
+    }
+
+    @Override
+    public void initializeObjects(){
+        Furniture chair = new Furniture("Деревянный стул","Обычный добротный деревянный стул");
+        this.addObject(chair);
+        Furniture table = new Furniture("Деревянный стол","Качественный деревянный стол из необычной породы дерева");
+        this.addObject(table);
     }
 }

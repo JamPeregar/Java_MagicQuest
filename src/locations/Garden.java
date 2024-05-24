@@ -10,6 +10,7 @@ public class Garden extends AbstractLocation {
         super("Сад", "Вы находитесь в уютном саду, окруженном цветущими растениями и ароматными цветами. Птицы щебечут на деревьях, а солнечные лучи проникают сквозь листву, создавая игривые тени на земле.");
         initializeItems();
         initializeNPCs();
+        initializeObjects();
     }
 
     @Override
@@ -20,6 +21,11 @@ public class Garden extends AbstractLocation {
 
     @Override
     public void initializeNPCs() {
+
+    }
+
+    @Override
+    public void initializeObjects(){
 
     }
 }

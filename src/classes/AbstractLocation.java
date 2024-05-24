@@ -1,5 +1,6 @@
 package classes;
 
+import interfaces.Interractable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -12,6 +13,7 @@ public abstract class AbstractLocation {
     protected Map<String, AbstractLocation> exits; // Хранение выходов из текущей локации
     protected ArrayList<AbstractItem> localinventory= new ArrayList<>();
     protected ArrayList<NonPlayableChar> localNPCs= new ArrayList<>();
+    protected ArrayList<Interractable> localObjects = new ArrayList<>();
 
     public AbstractLocation(final String name, final String dscr, String[] paths) {
         this.name = name;
@@ -62,6 +64,16 @@ public abstract class AbstractLocation {
         localNPCs.add(npc);
     }
 
+    // Метод для добавления объекта в локацию
+    public void addObject(Interractable obj) {
+        localObjects.add(obj);
+    }
+
+    // Метод для получения списка объектов в локации
+    public ArrayList<Interractable> getLocalObjects() {
+        return localObjects;
+    }
+
     // Метод для получения локального инвентаря локации
     public ArrayList<AbstractItem> getLocalInventory() {
         return localinventory;
@@ -90,6 +102,9 @@ public abstract class AbstractLocation {
     // Метод для инициализации NPC
     public abstract void initializeNPCs();
 
+    // Метод для инициализации объектов
+    public abstract void initializeObjects();
+
     @Override
     public String toString() {
 
@@ -107,6 +122,11 @@ public abstract class AbstractLocation {
         description.append("\nДоступные НПС в локации:"); // Добавление информации о предметах
         for (NonPlayableChar npc : localNPCs) { // Перебор всех предметов
             description.append("\n\t").append(npc.getName()); // Добавление информации о каждом предмете
+        }
+
+        description.append("\nОбъекты:"); // Добавление информации о объектах для взаимодействия
+        for (Interractable obj : localObjects) { // Перебор всех объектов
+            description.append("\n\t").append(obj.getName()); // Добавление информации о каждом объекте
         }
 
         return description.toString(); // Возврат полного описания

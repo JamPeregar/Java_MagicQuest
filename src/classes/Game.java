@@ -16,9 +16,12 @@ public class Game {
     //Controls game, catch player commands
     public void game() throws InterruptedException {
 
-        createPlayers();
-        creationLocations();
-        createTransitions ();
+        {
+            createPlayers();
+            creationLocations();
+            createTransitions();
+            initializeNPCs();
+        }
 
         Scanner scanner = new Scanner(System.in);
 
@@ -192,10 +195,15 @@ public class Game {
 
     private void createPlayers(){
         p1 = Player.createPlayer("Nik", "Student");
+<<<<<<< HEAD
+=======
+
+>>>>>>> f29e15d583effd8914b9c9ccb5ab7dd298eba442
     }
 
     private void initializeNPCs(){
-
+        Entity wizzzrd = new NonPlayableChar();
+        Crate woodencrate = new Crate("Деревянный ящик", "Это определённо магическое дерево");
     }
 
     private static String capitalize(String inputString) {

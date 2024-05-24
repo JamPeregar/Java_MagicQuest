@@ -17,17 +17,26 @@ public class Main {
         p1.giveItem(water);
         p1.giveItem(potion);
         Crate woodencrate = new Crate("Деревянный ящик", "Это определённо магическое дерево");
+<<<<<<< HEAD
+=======
+        Crate demoncrate = new Crate("Адский ящик", "Это определённо адский камень") {
+            @Override
+            public void interract(Entity interractor) {
+                AbstractItem item = new Poison();
+                interractor.giveItem(item);
+                System.out.println("В ящике найдено: " + item.getName());
+            }
+        };
+        AbstractItem[] itemsforquest = {poison, water, potion};
+>>>>>>> f29e15d583effd8914b9c9ccb5ab7dd298eba442
         woodencrate.interract(p1);
 
         NonPlayableChar wiz = new NonPlayableChar();
+        ElementalQuest quest = new ElementalQuest("Test", "Testing");
+        quest.addquestitem(itemsforquest);
+        //p1.takeItem("Яд");
         p1.showInventory();
-        wiz.showInventory();
-        p1.trade(wiz, "Пузырёк воды", true);
-        p1.showInventory();
-        wiz.showInventory();
-        p1.trade(woodencrate, "Яд", true);
-        woodencrate.showInventory();
-        Game game = new Game();
-        game.game();
+        out.println(quest.questcheck(p1));
+
     }
 }

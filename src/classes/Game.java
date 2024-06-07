@@ -192,7 +192,6 @@ public class Game {
                     SavedGame lG = p1.load();
                     p1.inventory=lG.saveInventory;
                     break;
-
                 default:
                     System.out.println("Неизвестная команда.");
                     Thread.sleep(timeSleep);

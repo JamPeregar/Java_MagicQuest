@@ -182,6 +182,13 @@ public class Game {
                     }
                     Thread.sleep(timeSleep);
                     break;
+                case "7":
+                case"save":
+                    p1.save(p1.inventory);
+                case "9":
+                case"load":
+                    SavedGame lG = p1.load();
+                    p1.inventory = lG.
                 default:
                     System.out.println("Неизвестная команда.");
                     Thread.sleep(timeSleep);

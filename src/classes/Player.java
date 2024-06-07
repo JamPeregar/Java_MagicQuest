@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class Player extends Entity implements Serializable {
     private static Player player; // Only 1 player
     private Map<String, AbstractItem> pubinventory = new HashMap<>();
@@ -111,14 +112,17 @@ public class Player extends Entity implements Serializable {
 
     }
 
-    public void load(){
+    public SavedGame load(){
         try (FileInputStream fileLoad = new FileInputStream("player.ser");
              ObjectInputStream in = new ObjectInputStream(fileLoad);) {
 
-            System.out.println("Игра загружена.");
-        } catch (IOException e) {
+            SavedGame savedGame = (SavedGame) in.readObject();
+            return savedGame;
+        } catch (IOException |ClassNotFoundException e) {
             e.printStackTrace();
+            return null;
         }
+
     }
 
 }

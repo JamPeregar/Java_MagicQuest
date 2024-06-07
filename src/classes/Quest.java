@@ -1,6 +1,8 @@
 package classes;
 
-public class Quest extends AbstractQuest{
+import java.io.Serializable;
+
+public class Quest extends AbstractQuest implements Serializable {
 
     public Quest() {
         super();

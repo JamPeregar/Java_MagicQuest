@@ -1,7 +1,9 @@
 package locations;
 import classes.*;
 
-public class AtticHomeWizard extends AbstractLocation {
+import java.io.Serializable;
+
+public class AtticHomeWizard extends AbstractLocation implements Serializable {
 
     public AtticHomeWizard() {
         super("Чердак", "Вы находитесь на пыльном чердаке дома волшебника. Повсюду разбросаны старые книги, паутина свисает с углов, а на полках лежат загадочные предметы.");

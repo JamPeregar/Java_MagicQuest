@@ -1,6 +1,8 @@
 package classes;
 
-public class Potion extends AbstractItem{
+import java.io.Serializable;
+
+public class Potion extends AbstractItem implements Serializable {
     private int hp_effect = 10;
 
     public Potion() {

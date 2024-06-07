@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.List;
 import java.util.Scanner;
+import utility.Serializator;
 
 public class Game implements Serializable {
 
@@ -12,6 +13,7 @@ public class Game implements Serializable {
     private Home home;
     private AtticHomeWizard atticHW;
     private Player p1;
+    private Serializator ser = new Serializator();
 
     //Controls game, catch player commands
     public void game(){
@@ -34,7 +36,9 @@ public class Game implements Serializable {
                     2. инвентарь - (показывает ваш инвентарь)
                     3. подобрать - (подобрать предмет)
                     4. использовать - (использовать предмет)
-                    5. Подойти к НПС""");
+                    5. Подойти к НПС
+                    6. Сохранить
+                    7. Загрузить""");
 
             String command = scanner.nextLine();
             switch (capitalize(command.toLowerCase())){
@@ -146,6 +150,13 @@ public class Game implements Serializable {
                         System.out.println("В этой локации нет НПС.");
                     }
                     break;
+
+
+                case "6":
+                    ser.saveGame(this);
+                case "7":
+                    //this = ser.loadGame();
+                    System.out.println("Заглушка");
 
 
             }

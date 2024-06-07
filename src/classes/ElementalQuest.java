@@ -1,11 +1,12 @@
 package classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class ElementalQuest extends AbstractQuest{
+public class ElementalQuest extends AbstractQuest implements Serializable {
     private ArrayList<AbstractItem> questitems = new ArrayList<>();
 
     public ElementalQuest() {

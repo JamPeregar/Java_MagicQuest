@@ -1,9 +1,10 @@
 package locations;
 import classes.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Home extends AbstractLocation {
+public class Home extends AbstractLocation implements Serializable {
 
     public Home() {
         super("Дом", "Вы находитесь в доме волшебника. Здесь пахнет магией и древними книгами.\nПовсюду расставлены странные артефакты и колбы с загадочными жидкостями.\nМягкий свет от ламп освещает помещение, создавая уютную, но немного таинственную атмосферу.");

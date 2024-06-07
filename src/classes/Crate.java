@@ -2,7 +2,9 @@ package classes;
 
 import interfaces.Interractable;
 
-public class Crate extends Furniture implements Interractable {
+import java.io.Serializable;
+
+public class Crate extends Furniture implements Interractable, Serializable {
 
     public Crate() {
         super();

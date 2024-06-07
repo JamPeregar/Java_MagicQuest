@@ -1,8 +1,9 @@
 package classes;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class NonPlayableChar extends Entity{
+public class NonPlayableChar extends Entity implements Serializable {
     private ArrayList<String> quotelist = new ArrayList<>();
 
     public NonPlayableChar() {

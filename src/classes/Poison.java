@@ -1,6 +1,8 @@
 package classes;
 
-public class Poison extends Potion{
+import java.io.Serializable;
+
+public class Poison extends Potion implements Serializable {
     private int hp_effect = -10;
 
     public Poison() {

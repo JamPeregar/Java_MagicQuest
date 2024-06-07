@@ -2,9 +2,10 @@ package locations;
 import classes.*;
 
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Garden extends AbstractLocation {
+public class Garden extends AbstractLocation implements Serializable {
 
     public Garden() {
         super("Сад", "Вы находитесь в уютном саду, окруженном цветущими растениями и ароматными цветами. Птицы щебечут на деревьях, а солнечные лучи проникают сквозь листву, создавая игривые тени на земле.");

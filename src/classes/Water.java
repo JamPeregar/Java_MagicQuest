@@ -1,6 +1,8 @@
 package classes;
 
-public class Water extends AbstractItem{
+import java.io.Serializable;
+
+public class Water extends AbstractItem implements Serializable {
     private int hp_effect = 5;
 
     public Water() {

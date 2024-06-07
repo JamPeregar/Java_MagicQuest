@@ -190,13 +190,9 @@ public class Game {
                 case "8":
                 case"load":
                     SavedGame lG = p1.load();
-<<<<<<< Updated upstream
                     p1.inventory=lG.saveInventory;
-
                     break;
-=======
-//                    p1.inventory =
->>>>>>> Stashed changes
+
                 default:
                     System.out.println("Неизвестная команда.");
                     Thread.sleep(timeSleep);

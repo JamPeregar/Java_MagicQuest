@@ -1,46 +1,41 @@
 package classes;
-import interfaces.Interractable;
 import locations.*;
 
-import java.util.HashMap;
+import java.io.Serializable;
 import java.util.Map;
 import java.util.List;
 import java.util.Scanner;
 
-public class Game {
+public class Game implements Serializable {
 
     private Garden garden;
     private Home home;
-    private final int timeSleep = 1300;
     private AtticHomeWizard atticHW;
-    private ElementalQuest quest1;
     private Player p1;
 
-
     //Controls game, catch player commands
-    public void game() throws InterruptedException {
+    public void game(){
 
         {
             createPlayers();
             creationLocations();
             createTransitions();
-            initializeQuests();
+            initializeNPCs();
         }
 
         Scanner scanner = new Scanner(System.in);
 
         AbstractLocation currentLocation = home;//стартовая локация
+        System.out.println(currentLocation);
         while (true) {
-            System.out.println(currentLocation);
             System.out.println("""
                     \nСписок доступных команд:
-                    \t1. перейти - (переход в другую локацию)
-                    \t2. инвентарь - (показывает ваш инвентарь)
-                    \t3. подобрать - (подобрать предмет)
-                    \t4. использовать - (использовать предмет)
-                    \t5. подойти к НПС
-                    \t6. взаимодействовать - (взаимодействовать с объектом)""");
-            System.out.print("> ");
+                    1. перейти - (переход в другую локацию)
+                    2. инвентарь - (показывает ваш инвентарь)
+                    3. подобрать - (подобрать предмет)
+                    4. использовать - (использовать предмет)
+                    5. Подойти к НПС""");
+
             String command = scanner.nextLine();
             switch (capitalize(command.toLowerCase())){
                 case "1":
@@ -50,7 +45,7 @@ public class Game {
                     int index = 1;
                     Map<String, AbstractLocation> exits = currentLocation.getExits();
                     for (String direction : exits.keySet()) {
-                        System.out.println("\t"+index + ". " + direction);
+                        System.out.println(index + ". " + direction);
                         index++;
                     }
                     // Получение порядкового номера выбранной локации
@@ -77,12 +72,10 @@ public class Game {
                     } else {
                         System.out.println("Неверный номер локации.");
                     }
-                    Thread.sleep(timeSleep);
                     break;
                 case "2":
                 case "Инвентарь":
                     p1.showInventory();
-                    Thread.sleep(timeSleep);
                     break;
                 case "3":
                 case "Подобрать":
@@ -110,7 +103,6 @@ public class Game {
                     } else {
                         System.out.println("Неверный номер предмета.");
                     }
-                    Thread.sleep(timeSleep);
                     break;
                 case "4":
                 case "Использовать":
@@ -124,7 +116,6 @@ public class Game {
                     } else {
                         System.out.println("Неверный номер предмета.");
                     }
-                    Thread.sleep(timeSleep);
                     break;
                 case "5":
                 case "Подойти к НПС":
@@ -132,28 +123,20 @@ public class Game {
                     if (!currentLocation.getLocalNPCs().isEmpty()) {
                         for (int i = 0; i < currentLocation.getLocalNPCs().size(); i++) {
                             NonPlayableChar npc = currentLocation.getLocalNPCs().get(i);
-                            System.out.println("\t"+ (i + 1) + ". " + npc.getName() + ": " + npc.getDescription());
+                            System.out.println((i + 1) + ". " + npc.getName() + ": " + npc.getDescription());
                         }
                         System.out.println("Введите номер НПС, к которому хотите подойти:");
                         int npcIndex = Integer.parseInt(scanner.nextLine()) - 1;
                         if (npcIndex >= 0 && npcIndex < currentLocation.getLocalNPCs().size()) {
                             NonPlayableChar npc = currentLocation.getLocalNPCs().get(npcIndex);
-                            System.out.println("\t1. Поговорить\n\t2. Принять квест\n\t3. Сдать квест");
-                            System.out.print("> ");
+                            System.out.println("1. Поговорить\n2. Квест");
                             String command2 = scanner.nextLine();
                             switch (capitalize(command2.toLowerCase())){
                                 case "1":
                                     npc.speak();
                                     break;
                                 case "2":
-                                    System.out.println("Вы приняли квест: " + quest1.getName() + "\n" + quest1.getBrief());
-                                    break;
-                                case "3":
-                                    if (quest1.questcheck(p1)) {
-                                        System.out.println("Вы сдали квест: " + quest1.getName());
-                                    } else {
-                                        System.out.println("Вы еще не выполнили все условия для этого квеста.");
-                                    }
+                                    System.out.println("тут должена быть квестовая система");
                                     break;
                             }
                         } else {
@@ -162,30 +145,8 @@ public class Game {
                     } else {
                         System.out.println("В этой локации нет НПС.");
                     }
-                    Thread.sleep(timeSleep);
                     break;
 
-                case "6":
-                case "Осмотреть объект":
-                    System.out.println("Доступные объекты в локации:");
-                    for (int i = 0; i < currentLocation.getLocalObjects().size(); i++) {
-                        Interractable object = currentLocation.getLocalObjects().get(i);
-                        System.out.println("\t"+(i + 1) + ". " + object.getName());
-                    }
-                    System.out.println("Введите номер объекта для взаимодействия:");
-                    int objectIndex = Integer.parseInt(scanner.nextLine());
-                    if (objectIndex > 0 && objectIndex <= currentLocation.getLocalObjects().size()) {
-                        Interractable object = currentLocation.getLocalObjects().get(objectIndex - 1);
-                        object.interract(p1);
-                    } else {
-                        System.out.println("Неверный номер объекта.");
-                    }
-                    Thread.sleep(timeSleep);
-                    break;
-                default:
-                    System.out.println("Неизвестная команда.");
-                    Thread.sleep(timeSleep);
-                    break;
 
             }
 
@@ -205,16 +166,12 @@ public class Game {
 
     private void createPlayers(){
         p1 = Player.createPlayer("Nik", "Student");
+
     }
 
-    private void initializeQuests(){
-        quest1 = new ElementalQuest("Помощь волшебнику.", "Нужно найти и принести волшебнику: яд, воду и зелье.");
-        AbstractItem poison = new Poison();
-        AbstractItem water = new Water();
-        AbstractItem potion = new Potion();
-        AbstractItem[] itemsforquest1 = {poison, water, potion};
-        quest1.addquestitem(itemsforquest1);
-
+    private void initializeNPCs(){
+        Entity wizzzrd = new NonPlayableChar();
+        Crate woodencrate = new Crate("Деревянный ящик", "Это определённо магическое дерево");
     }
 
     private static String capitalize(String inputString) {

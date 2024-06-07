@@ -113,10 +113,11 @@ public class Player extends Entity implements Serializable {
     }
 
     public SavedGame load(){
-        try (FileInputStream fileLoad = new FileInputStream("player.ser");
-             ObjectInputStream in = new ObjectInputStream(fileLoad);) {
+        try (FileInputStream fileLoad = new FileInputStream(".//save.ser");
+             ObjectInputStream outStream = new ObjectInputStream(fileLoad);) {
 
-            SavedGame savedGame = (SavedGame) in.readObject();
+            SavedGame savedGame = (SavedGame) outStream.readObject();
+            System.out.println(savedGame);
             return savedGame;
         } catch (IOException |ClassNotFoundException e) {
             e.printStackTrace();

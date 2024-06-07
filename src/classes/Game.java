@@ -184,12 +184,15 @@ public class Game {
                     break;
                 case "7":
                 case"save":
+                    p1.showInventory();
                     p1.save(p1.inventory);
+                    break;
                 case "8":
                 case"load":
                     SavedGame lG = p1.load();
-                    System.out.println(lG);
-//                    p1.inventory = lG.
+                    p1.inventory=lG.saveInventory;
+
+                    break;
                 default:
                     System.out.println("Неизвестная команда.");
                     Thread.sleep(timeSleep);

@@ -2,6 +2,7 @@ package classes;
 
 public class Poison extends Potion{
     private int hp_effect = -10;
+    private static final long serialVersionUID = 1L;
 
     public Poison() {
         this.setName("Яд");

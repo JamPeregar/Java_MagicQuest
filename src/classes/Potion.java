@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Potion extends AbstractItem implements Serializable {
     private int hp_effect = 10;
+    private static final long serialVersionUID = 1L;
 
     public Potion() {
         this.setName("Странное зелье");

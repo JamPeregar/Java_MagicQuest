@@ -1,7 +1,10 @@
 package classes;
 
-public abstract class AbstractItem {
+import java.io.Serializable;
+
+public abstract class AbstractItem implements Serializable {
     private String name;
+    private static final long serialVersionUID = 1L;
     private String descr;
     private String effect;
     private boolean isUsed = false;

@@ -1,14 +1,16 @@
 package classes;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Player extends Entity{
+public class Player extends Entity implements Serializable {
     private static Player player; // Only 1 player
     private Map<String, AbstractItem> pubinventory = new HashMap<>();
     private ArrayList<AbstractQuest> questlist = new ArrayList<>();
+
 
 
     private Player(String name, String descr) {
@@ -93,6 +95,30 @@ public class Player extends Entity{
                 i++;
             }
         } else {System.out.println("Пусто!");}
+    }
+
+    public void save(ArrayList<AbstractItem> plInventory){
+        try{
+            FileOutputStream fileSave = new FileOutputStream(".//save.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileSave);
+            SavedGame savedGame = new SavedGame(plInventory);
+            out.writeObject(savedGame);
+            out.close();
+            fileSave.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public void load(){
+        try (FileInputStream fileLoad = new FileInputStream("player.ser");
+             ObjectInputStream in = new ObjectInputStream(fileLoad);) {
+
+            System.out.println("Игра загружена.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

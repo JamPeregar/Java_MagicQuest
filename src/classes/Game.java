@@ -154,9 +154,11 @@ public class Game implements Serializable {
 
                 case "6":
                     ser.saveGame(this);
+                    break;
                 case "7":
                     //this = ser.loadGame();
                     System.out.println("Заглушка");
+                    break;
 
 
             }

@@ -11,7 +11,7 @@ public class Potion extends AbstractItem implements Serializable {
     public Potion() {
         this.setName("Странное зелье");
         this.setDescr("Таинственное зелье, с древними знаками на керамической оболочке и светящейся жидкостью внутри...");
-        this.setEffect("+ 5 к здоровью и 1 к красноречию!");
+        this.setEffect("+ к здоровью и 1 к красноречию!");
     }
 
     public Potion(final String name, final String descr) {
@@ -19,6 +19,11 @@ public class Potion extends AbstractItem implements Serializable {
     }
     public Potion(final String name, final String descr, final String effect) {
         super(name, descr, effect);
+    }
+
+    public Potion(final String name, final String descr, final String effect, final int hp_effect) {
+        super(name, descr, effect);
+        this.hp_effect = hp_effect;
     }
 
     @Override

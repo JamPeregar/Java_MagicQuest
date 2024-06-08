@@ -25,10 +25,7 @@ public class Game2  implements Serializable {
 
 
     {
-        //locations
-        home.addBidirectionalExit("Сад", garden, "Дом волшебника");
-        home.addBidirectionalExit("Чердак", atticHW, "Дом волшебника");
-        home.addItem(new Poison("Яд", "Явно отрава", "Отравление", -20));
+        //items
         //entity
         ArrayList<String> drunk_quotes = new ArrayList<>();// Сделать функцию, считывающую текстовый файл.
         drunk_quotes.add("ОООХ ГАРАЖИ-ГАРАЖИ...");
@@ -37,9 +34,16 @@ public class Game2  implements Serializable {
         drunk_quotes.add("Ты кто такой? Я тебя не звал, иди нафиг");
         drunk_quotes.add("Тут не осталось нормальной выпивки!");
         NonPlayableChar drunk = new NonPlayableChar("Пьяница", "Крайне нетрезвый тип, но глаза добрые...", drunk_quotes);
-        atticHW.addNPC(drunk);
         drunk.setHealth(10);
+
         Crate woodencrate = new Crate("Деревянный ящик", "Это определённо магическое дерево");
+        //locations
+        home.addBidirectionalExit("Сад", garden, "Дом волшебника");
+        home.addBidirectionalExit("Чердак", atticHW, "Дом волшебника");
+        home.addItem(new Poison("Яд", "Явно отрава", "Отравление", -20));
+        home.addItem(new Potion("Супер-лечебное зелье", "Горит ярко-красно", "Дрожь по всему телу..", 20));
+        home.addObject(woodencrate);
+        atticHW.addNPC(drunk);
     }
 
 
@@ -163,6 +167,7 @@ public class Game2  implements Serializable {
                                     break;
                                 case "3":
                                     System.out.println("Введите имя переданного предмета");
+                                    p1.showInventory();
                                     String cmd_trade = scanner.nextLine();
                                     p1.trade(npc, cmd_trade, true);
                                     npc.useItem(cmd_trade);

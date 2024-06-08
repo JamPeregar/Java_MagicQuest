@@ -7,6 +7,7 @@ import utility.Serializator;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -23,9 +24,27 @@ public class Game2  implements Serializable {
     private static Serializator ser = new Serializator();
 
 
+    {
+        //locations
+        home.addBidirectionalExit("Сад", garden, "Дом волшебника");
+        home.addBidirectionalExit("Чердак", atticHW, "Дом волшебника");
+        home.addItem(new Poison("Яд", "Явно отрава", "Отравление", -20));
+        //entity
+        ArrayList<String> drunk_quotes = new ArrayList<>();// Сделать функцию, считывающую текстовый файл.
+        drunk_quotes.add("ОООХ ГАРАЖИ-ГАРАЖИ...");
+        drunk_quotes.add("Я того, забыл");
+        drunk_quotes.add("Принеси-ка мне чего!");
+        drunk_quotes.add("Ты кто такой? Я тебя не звал, иди нафиг");
+        drunk_quotes.add("Тут не осталось нормальной выпивки!");
+        NonPlayableChar drunk = new NonPlayableChar("Пьяница", "Крайне нетрезвый тип, но глаза добрые...", drunk_quotes);
+        atticHW.addNPC(drunk);
+        drunk.setHealth(10);
+        Crate woodencrate = new Crate("Деревянный ящик", "Это определённо магическое дерево");
+    }
+
+
 
     public void game(){
-
         while (p1.isAlive()) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("""
@@ -133,7 +152,7 @@ public class Game2  implements Serializable {
                         int npcIndex = Integer.parseInt(scanner.nextLine()) - 1;
                         if (npcIndex >= 0 && npcIndex < currentLocation.getLocalNPCs().size()) {
                             NonPlayableChar npc = currentLocation.getLocalNPCs().get(npcIndex);
-                            System.out.println("1. Поговорить\n2. Квест");
+                            System.out.println("1. Поговорить\n2. Квест\n3. Дать предмет");
                             String command2 = scanner.nextLine();
                             switch (capitalize(command2.toLowerCase())) {
                                 case "1":
@@ -141,6 +160,12 @@ public class Game2  implements Serializable {
                                     break;
                                 case "2":
                                     System.out.println("тут должена быть квестовая система");
+                                    break;
+                                case "3":
+                                    System.out.println("Введите имя переданного предмета");
+                                    String cmd_trade = scanner.nextLine();
+                                    p1.trade(npc, cmd_trade, true);
+                                    npc.useItem(cmd_trade);
                                     break;
                             }
                         } else {

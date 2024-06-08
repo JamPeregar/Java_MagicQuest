@@ -35,6 +35,10 @@ public abstract class Entity implements Serializable {
         return hp;
     }
 
+    public void setHealth(int hp) {
+        this.hp = hp;
+    }
+
     public boolean isAlive() {
         return hp > 0;
     }

@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Player extends Entity implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private static Player player; // Only 1 player
     private Map<String, AbstractItem> pubinventory = new HashMap<>();
     private ArrayList<AbstractQuest> questlist = new ArrayList<>();
-
-
 
     private Player(String name, String descr) {
         super(name, descr);

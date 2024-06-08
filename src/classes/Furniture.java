@@ -2,9 +2,14 @@ package classes;
 
 import interfaces.Interractable;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Iterator;
 
-public class Furniture extends Entity implements Interractable {
+public class Furniture extends Entity implements Interractable , Serializable{
+    @Serial
+    private static final long serialVersionUID = 1L;
+
 
     public Furniture() {
         super();

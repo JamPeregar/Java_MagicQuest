@@ -1,34 +1,38 @@
 package classes;
 import locations.*;
 
-import java.io.Serializable;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Scanner;
 import utility.Serializator;
 
 public class Game implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
 
-    private Garden garden;
-    private Home home;
-    private AtticHomeWizard atticHW;
-    private Player p1;
-    private Serializator ser = new Serializator();
+    private Garden garden = new Garden();
+    private Home home = new Home();
+    private AtticHomeWizard atticHW = new AtticHomeWizard();
+    public AbstractLocation currentLocation = home;
+    private Player p1 = Player.createPlayer("Nikita", "Student");
+    private static Serializator ser = new Serializator();
+
 
     //Controls game, catch player commands
     public void game(){
 
         {
-            createPlayers();
-            creationLocations();
+            //createPlayers();
             createTransitions();
             initializeNPCs();
+            //public AbstractLocation currentLocation = home;//стартовая локация
+            System.out.println(currentLocation);
         }
 
         Scanner scanner = new Scanner(System.in);
 
-        AbstractLocation currentLocation = home;//стартовая локация
-        System.out.println(currentLocation);
         while (true) {
             System.out.println("""
                     \nСписок доступных команд:
@@ -151,25 +155,20 @@ public class Game implements Serializable {
                     }
                     break;
 
-
                 case "6":
-                    ser.saveGame(this);
-                    break;
+                    saveInv();
                 case "7":
-                    //this = ser.loadGame();
-                    System.out.println("Заглушка");
-                    break;
+                    loadShow();
+                case "gs":
+                    //ser.saveGame(this);
+                //case "exit":
+                //    return;
+
 
 
             }
 
         }
-    }
-    private void creationLocations (){
-        home = new Home();
-        garden = new Garden();
-        atticHW = new AtticHomeWizard();
-
     }
 
     private void createTransitions (){
@@ -177,10 +176,11 @@ public class Game implements Serializable {
         home.addBidirectionalExit("Чердак", atticHW, "Дом волшебника");
     }
 
-    private void createPlayers(){
-        p1 = Player.createPlayer("Nik", "Student");
-
+    private Player createPlayer(){
+        return Player.createPlayer("Nik", "Student");
     }
+
+    public Player getplayer() {return p1;}
 
     private void initializeNPCs(){
         Entity wizzzrd = new NonPlayableChar();
@@ -195,4 +195,25 @@ public class Game implements Serializable {
         char capitalFirstLetter = Character.toUpperCase(firstLetter);
         return capitalFirstLetter + inputString.substring(1);
     }
+
+    private void saveInv() {
+        File f = new File("SAVE1L.dat");
+        try(ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(f)))) {
+
+            //out.writeObject(this);
+            out.writeObject(p1);
+
+        } catch (IOException ex) {
+            System.err.println("ERR not found file");
+            ex.printStackTrace();
+        }
+    }
+
+    public void loadShow() {
+        try(ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("SAVE1L.dat")))) {
+            this.p1 = (Player) in.readObject();
+        }  catch (Exception ex) {ex.printStackTrace();}
+        //return null;
+    }
+
 }

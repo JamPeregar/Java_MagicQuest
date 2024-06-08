@@ -1,12 +1,17 @@
 package classes;
 
 import interfaces.Interractable;
+
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public abstract class AbstractLocation {
+public abstract class AbstractLocation implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private final String name;
     private final String descr;
     //protected String[] paths;
@@ -14,6 +19,11 @@ public abstract class AbstractLocation {
     protected ArrayList<AbstractItem> localinventory= new ArrayList<>();
     protected ArrayList<NonPlayableChar> localNPCs= new ArrayList<>();
     protected ArrayList<Interractable> localObjects = new ArrayList<>();
+
+    public AbstractLocation() {
+        this.name = "WTF";
+        this.descr = "Default";
+    }
 
     public AbstractLocation(final String name, final String dscr, String[] paths) {
         this.name = name;

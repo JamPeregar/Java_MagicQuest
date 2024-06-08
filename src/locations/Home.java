@@ -21,6 +21,7 @@ public class Home extends AbstractLocation implements Serializable {
         this.addItem(water);
         this.addItem(potion);
         this.addItem(potion2);
+        this.addItem(new Poison("Яд", "Явно отрава", "Отравление", -10));
     }
 
     @Override

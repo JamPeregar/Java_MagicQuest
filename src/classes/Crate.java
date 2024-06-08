@@ -4,7 +4,7 @@ import interfaces.Interractable;
 
 import java.io.Serializable;
 
-public class Crate extends Furniture implements Interractable, Serializable {
+public class Crate extends Furniture implements Interractable {
 
     public Crate() {
         super();

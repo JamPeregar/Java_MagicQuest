@@ -1,8 +1,12 @@
 package classes;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.*;
 
-public abstract class Entity {
+public abstract class Entity implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private final String name;
     private final String descr;
     private int hp = 100;
@@ -103,8 +107,9 @@ public abstract class Entity {
 
     @Override
     public String toString() {
-        return "Entity{" +
-                "Имя: " + name +
-                ", Описание: " + descr + "]";
+        return  "[Имя: " + name +
+                ", Описание: " + descr +
+                ", Здоровье: " + hp +
+                "]";
     }
 }

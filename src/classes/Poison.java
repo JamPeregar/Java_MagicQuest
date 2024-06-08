@@ -1,8 +1,11 @@
 package classes;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class Poison extends Potion implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private int hp_effect = -10;
 
     public Poison() {

@@ -1,9 +1,12 @@
 package classes;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 public class NonPlayableChar extends Entity implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private ArrayList<String> quotelist = new ArrayList<>();
 
     public NonPlayableChar() {
